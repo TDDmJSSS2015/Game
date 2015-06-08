@@ -6,6 +6,7 @@ function World(name, width, height) {
 	}
 	
 	this.players = new Array();
+	this.missiles = new Array(); // 08.06, 11:52
 	
 	this.name = name;
 	this.width = width;
@@ -15,8 +16,39 @@ function World(name, width, height) {
 	this.pve = true;
 	
 	this.addPlayer = function (player) {
-		players.push(player);
+		this.players.push(player);
 	};
+	
+	this.addMissile = function (missile) {
+		this.missiles.push(missile)
+	}
+}
+
+/* This function creating a Missile
+ * the Missile have some attributes to identify the dmgType, amount,owner and the name of it
+ */
+function Missile(owner, dmg, dmgType, name, ttl, dim){	// 11:21, 08. June
+	if (!(this instanceof Missile)) {
+		return new Missile (owner, dmg, dmgType, name) ;
+	}
+	
+	this.dmg = dmg;	// 11:24, 08. June
+	this.owner = owner; // 11:27, 08. June
+	this.dmgType = dmgType; // 11:31, 08.June
+	this.name = name; // 11:34, 08. June
+	this.ttl = ttl; // 12:10, 08. June
+	this.dim = dim; // 12:18, 08. June
+	
+	/* Anmerkung: hier eventuell noch ein paar funktionen zwecks 
+	 * verbindung von dim und ttl ?
+	 * ausbreitung bzw. movement der attacke muss korreliert mit der ttl sein
+	 * ttl. muss existieren damit die attacke nicht endlos über die map fliegt
+	 * 
+	 * ...
+	 * 
+	 * irgend eine abbruchfunktion bzw destroy() function sollte es auch geben,
+	 * damit bei collision die attacke sofort determiniert werden kann ...
+	 */
 }
 
 function Dim(x, y, w, h){

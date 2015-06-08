@@ -406,5 +406,70 @@ TestCase("LakeInvaders Game", {
     	
     	assertTrue(dim.x > 0);
     	assertTrue(dim.y > 0);
+    },
+    "test does missile exist": function () {
+    	// 08. June 2015, 11:18 
+    	fireball = new Missile();
+    	
+    	assertTrue(fireball instanceof Missile);
+    },
+    "test does missile have dmg": function () {
+    	// 08. June 2015, 11:24
+    	fireball = new Missile("player1",6); //player1 added 11:28
+    	
+    	assertTrue(fireball.dmg != undefined);
+    },
+    "test dies missile have owner (and dmg)": function () {
+    	// 08. June 2015, 11:26
+    	fireball = new Missile("player1", 6);
+    	
+    	assertTrue(fireball.owner != undefined);
+    },
+    "test does missile have dmgType": function() {
+    	// 08. June 11:29
+    	fireball = new Missile("player1", 6, "magic");
+    	
+    	assertTrue(fireball.dmgType != undefined);
+    },
+    "test does missile have name": function() {
+    	// 08. June 11:33
+    	fireball = new Missile("player1", 6, "magic", "greater Fireball");
+    	
+    	assertTrue(fireball.name != undefined);
+    },
+    "test does world can hold the missiles": function() {
+    	// 08. June 11:49
+    	assertTrue(world.missiles != undefined);
+    },
+    "test can world add missiles": function() {
+    	// 08. June 11:52
+    	assertTrue(world.addMissile != undefined);
+    },
+    "test is missile added?": function() {
+    	// 08. June 11:54
+    	theName = "berserkAxe"; // 12:02
+    	bAxe = new Missile("player2", 42, "physic", theName);
+    	world.addMissile(bAxe);
+    	
+    	assertEquals(world.missiles.length, 1);
+    	assertEquals(world.missiles[0].name, theName) // 12:02
+    },
+    "test does missile have a deathTimer (not eternely flying over the map)": function () {
+    	// 08. June, 12:08
+    	firebomb = new Missile("player3", 10, "magic", "Supernova", 10);
+    	
+    	assertTrue(firebomb.ttl != undefined);
+    },
+    "test does missile habe dimensions": function () {
+    	// 08. June, 12:13
+    	coldDim = new Dim(1,1,10,10);
+    	frostwave = new Missile("player4", 4, "magic", "Frostwave", 3, coldDim);
+    	
+    	assertTrue(frostwave.dim != undefined);
+    	/*	Anmerkung:
+    	 *  Dimensionen einer Attacke könnten interessant werden frage der implementierung?
+    	 *  position x und y müssen hier vom Spieler und der Streckung der Attack berechnet werden
+    	 *  desweiteren soll sie sich ja auch bewegen ... evtl. schon wieder zu komplex?
+    	 */
     }
 });
